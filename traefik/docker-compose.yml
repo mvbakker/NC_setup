@@ -1,9 +1,9 @@
-version: "3"
+version: "3.3"
 
 services:
   traefik:
     image: traefik
-    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=funkypenguin.co.nz --logLevel=DEBUG
+    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=mvbakker.nl --logLevel=DEBUG
     ports:
       - target: 80
         published: 80
@@ -18,8 +18,8 @@ services:
         protocol: tcp
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/data/traefik/traefik.toml:/traefik.toml:ro
-      - /var/data/traefik/acme.json:/acme.json
+      - nc-storage-bucket/traefik.toml:/traefik.toml:ro
+      - nc-storage-bucket/acme.json:/acme.json
     labels:
       - "traefik.enable=false"
     networks:
