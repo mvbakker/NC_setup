@@ -18,8 +18,8 @@ services:
         protocol: tcp
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - nc-storage-bucket/traefik.toml:/traefik.toml:ro
-      - nc-storage-bucket/acme.json:/acme.json
+      - nc-storage-bucket-traefik:/
+      - nc-storage-bucket-traefik:/
     labels:
       - "traefik.enable=false"
     networks:
@@ -30,6 +30,10 @@ services:
         constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
+
+volumes:
+  nc-storage-bucket-traefik:
+    external: true
 
 networks:
   public:
